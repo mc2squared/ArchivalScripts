@@ -5,6 +5,7 @@
 nick=$1
 proj=auto
 instances=$2
+threads-per-instance=$3
 sudo apt-get update
 sudo apt-get install -y \
      apt-transport-https \
@@ -23,7 +24,7 @@ for i in $(seq $2); do
 	sudo docker run \
     	  --detach \
     	  --env DOWNLOADER="$nick" \
-    	  --env CONCURRENT_ITEMS=5 \
+    	  --env CONCURRENT_ITEMS=$threads-per-instance \
     	  --env SELECTED_PROJECT="$proj" \
     	  --restart always \
     	  --name ATwarrior \
